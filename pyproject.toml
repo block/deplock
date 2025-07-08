@@ -3,13 +3,18 @@ name = "deplock"
 version = "0.1.0"
 description = ""
 readme = "README.md"
-authors = ["Tyler Zupan <tzupan@squareup.com>", "Josh Hamet <jhamet@squareup.com>"]
-requires-python = ">=3.12,<3.13"
+authors = [{ name = "Tyler Zupan", email = "tzupan@squareup.com" },
+           { name = "Josh Hamet", email = "jhamet@squareup.com" },
+]
+requires-python = ">=3.10"
 dependencies = [
     "poetry>=2.1.3",
-    "pydantic>=2.11.5",
+    "pydantic>=2.11.7",
     "tomlkit>=0.13.3",
 ]
+
+[tool.uv]
+package = true
 
 [[tool.uv.index]]
 name = "pypi"
