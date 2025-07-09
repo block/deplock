@@ -35,7 +35,7 @@ def test_poetry_parser(poetry_lock_dir, target_environment):
                          poetry_lock_filename="poetry.lock")
     poetry_lock.add_target_environment_specification(target_environment)
     poetry_lock.validate_poetry_lock()
-    assert poetry_lock.poetry_lock_is_validated == True
+    assert poetry_lock.poetry_lock_is_validated is True
     
     valid_packages = poetry_lock.get_valid_packages_from_lock()
     package_names = [i for i in valid_packages]

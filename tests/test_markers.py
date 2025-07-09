@@ -189,7 +189,7 @@ def test_3_12_5(input_3_12_5):
 
 def test_passing_double_py_marker():
     requires_python = ">=3.9, <3.11"
-    assert validate_python_version(specifier=requires_python, current_version="3.10.5") == True
+    assert validate_python_version(specifier=requires_python, current_version="3.10.5") is True
 
 def test_failing_double_py_marker():
     requires_python = ">=3.9, <3.11"
@@ -200,18 +200,18 @@ def test_failing_double_py_marker():
 
 def test_passing_neg_single_platform_marker(env_3_12):
     marker = "sys_platform != 'win32'"
-    assert check_markers(markers=marker, environment=env_3_12) == True
+    assert check_markers(markers=marker, environment=env_3_12) is True
 
 def test_passing_pos_single_platform_marker(env_3_12):
     marker = "sys_platform == 'linux'"
-    assert check_markers(markers=marker, environment=env_3_12) == True
+    assert check_markers(markers=marker, environment=env_3_12) is True
 
 def test_passing_multiple_markers_short_list(env_3_12):
     resolution_markers = [
         "python_full_version > '3.10' and sys_platform != 'win32'",
         "python_full_version > '3.10' and sys_platform == 'win32'",
     ]
-    assert check_markers(markers=resolution_markers, environment=env_3_12) == True
+    assert check_markers(markers=resolution_markers, environment=env_3_12) is True
 
 def test_passing_multiple_markers_long_list(env_3_12):
     resolution_markers = [
@@ -220,8 +220,8 @@ def test_passing_multiple_markers_long_list(env_3_12):
         "python_full_version < '3.10' and sys_platform != 'win32'",
         "python_full_version < '3.10' and sys_platform == 'win32'",
     ]
-    assert check_markers(markers=resolution_markers, environment=env_3_12) == True
+    assert check_markers(markers=resolution_markers, environment=env_3_12) is True
 
 def test_passing_long_marker(env_3_12):
     marker = "python_full_version >= '3.10' and sys_platform != 'emscripten' and sys_platform != 'win32'"
-    assert check_markers(markers=marker, environment=env_3_12) == True
+    assert check_markers(markers=marker, environment=env_3_12) is True

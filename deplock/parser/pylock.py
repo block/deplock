@@ -36,7 +36,7 @@ class PyLock:
             case Path():
                 self.base_path = base_path
             case _:  # Default case for any other value
-                logger.debug(f"Value of base_path must be None, str, or pathlib.Path")
+                logger.debug("Value of base_path must be None, str, or pathlib.Path")
 
         match end_dir:
             case None:
@@ -46,7 +46,7 @@ class PyLock:
             case Path():
                 self.end_dir = end_dir
             case _:  # Default case for any other value
-                logger.debug(f"Value of end_dir must be None, str, or pathlib.Path")
+                logger.debug("Value of end_dir must be None, str, or pathlib.Path")
 
         self.package_name = package_name
         self.python_target_env_spec = None

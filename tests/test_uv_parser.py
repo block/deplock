@@ -18,6 +18,7 @@ def uv_lock_dir():
 def test_find_uv_lock_file(uv_lock_dir):
     uv_lock = UVLock(base_path=uv_lock_dir
                      , uv_lock_filename="uv.lock")
+    assert uv_lock is not None
 
 def test_uv_parser(uv_lock_dir, target_environment):
     uv_lock = UVLock(base_path=uv_lock_dir, uv_lock_filename="uv.lock")

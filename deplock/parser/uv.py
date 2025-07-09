@@ -34,7 +34,7 @@ class UVLock:
             case Path():
                 self.base_path = base_path
             case _:  # Default case for any other value
-                logger.debug(f"Value of base_path must be None, str, or pathlib.Path")
+                logger.debug("Value of base_path must be None, str, or pathlib.Path")
 
         match end_dir:
             case None:
@@ -44,7 +44,7 @@ class UVLock:
             case Path():
                 self.end_dir = end_dir
             case _:  # Default case for any other value
-                logger.debug(f"Value of end_dir must be None, str, or pathlib.Path")
+                logger.debug("Value of end_dir must be None, str, or pathlib.Path")
 
         self.uv_lock_path = self._search_tree_for_lock_file(uv_lock_filename)
         self.data = self._parse_uv_lock()

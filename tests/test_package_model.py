@@ -220,4 +220,6 @@ def test_package_w_extra_dists():
     test_package = package_list[3]
     with pytest.raises(PackageDistributionValidationError) as e:
         package_config = Package.model_validate(test_package)
+        assert package_config is not None
+        print(e.value)
 
