@@ -1,27 +1,75 @@
-# $PROJECT_NAME README
-
-Congrats, project leads! You got a new project to grow!
-
-This stub is meant to help you form a strong community around your work. It's yours to adapt, and may 
-diverge from this initial structure. Just keep the files seeded in this repo, and the rest is yours to evolve! 
+# DepLock
 
 ## Introduction
 
-Orient users to the project here. This is a good place to start with an assumption
-that the user knows very little - so start with the Big Picture and show how this
-project fits into it.
+A simple Python package used to parse lock files, useful when writing code that must 
+interpret the requirements of a lock file and process or manipulate these requirements.
 
-Then maybe a dive into what this project does.
+### Background
+With the acceptance of [Pep 751](https://peps.python.org/pep-0751/) in March 2025, Python
+has agreed upon a universal lock file specification, known as the `pylock.toml`.  The 
+PEP describes the projects as:
 
-Diagrams and other visuals are helpful here. Perhaps code snippets showing usage.
+"_[A] new file format for specifying dependencies to enable reproducible installation in a 
+Python environment. The format is designed to be human-readable and machine-generated. 
+Installers consuming the file should be able to calculate what to install without the 
+need for dependency resolution at install-time._"
 
-Project leads should complete, alongside this `README`:
-* [CODEOWNERS](./CODEOWNERS) - set project lead(s)
-* [CONTRIBUTING.md](./CONTRIBUTING.md) - Fill out how to: install prereqs, build, test, run, access CI, chat, discuss, file issues
-* [Bug-report.md](.github/ISSUE_TEMPLATE/bug-report.md) - Fill out `Assignees` add codeowners @names
-* [config.yml](.github/ISSUE_TEMPLATE/config.yml) - remove "(/add your discord channel..)" and replace the url with your Discord channel if applicable
+There are many use cases where a Python API that parses the lock file specifications into 
+Python objects are useful and necessary to build on top of.
 
-The other files in this template repo may be used as-is:
+### How To Use
+Import the package and get started!
+
+```python
+from deplock.parser.pylock import PyLock
+from deplock.types.environment import PythonVersion
+from deplock.utils.prebuilt_envs import python_env_one
+
+# create the config
+config = PyLock()
+py_env = python_env_one(PythonVersion.current_version())
+
+# add a Python environment specifier
+config.add_target_environment_specification(py_env)
+
+# validate that lock file is valid for current Python env
+config.validate_pylock_toml()
+
+# find the subset of packages in lock file valid for current Python env
+config.get_valid_packages_from_lock()
+```
+
+Simply change the configuration class if to parse `uv.lock` files!
+```python
+from deplock.parser.uv import UVLock
+from deplock.types.environment import PythonVersion
+from deplock.utils.prebuilt_envs import python_env_one
+
+# create the config
+config = UVLock()
+py_env = python_env_one(PythonVersion.current_version())
+
+# add a Python environment specifier
+config.add_target_environment_specification(py_env)
+
+# validate that lock file is valid for current Python env
+config.validate_uv_lock()
+
+# find the subset of packages in lock file valid for current Python env
+config.get_valid_packages_from_lock()
+
+# find the preferred distribution of each valid package
+config.get_preferred_distributions()
+```
+
+### Notes
+Unlike some lock files, the metadata contained in `[[package.dependencies]]` is 
+purposefully not used to determine if a package is required in the current installation 
+environment.  The PEP confirms this, stating "_Tools MUST NOT use this information when 
+doing installation; it is purely informational for auditing purposes._"
+
+More Open Source and usage information can be found here:
 * [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
 * [GOVERNANCE.md](./GOVERNANCE.md)
 * [LICENSE](./LICENSE)
@@ -35,3 +83,7 @@ The other files in this template repo may be used as-is:
 | [CONTRIBUTING.md](./CONTRIBUTING.md)       | Developer guide to build, test, run, access CI, chat, discuss, file issues     |
 | [GOVERNANCE.md](./GOVERNANCE.md)           | Project governance                                                             |
 | [LICENSE](./LICENSE)                       | Apache License, Version 2.0                                                    |
+
+Authors:
+* Tyler Zupan
+* Josh Hamet

@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "basic-project"
+version = "0.1.0"
+description = "A basic project to run a series of tests against to make sure the correct dependencies are parsed depending on the input parameters"
+authors = ["Tyler Zupan <tzupan@squareup.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+bottle = "0.12.25"
+banal = { version = "1.0.6", optional = true }
+local-poetry-project = {path = "../local_poetry_project", develop = true, optional = true }
+pendulum = { version = "2.1.2", optional = true }
+waitress = { version = "3.0.1", optional = true }
+docker = { version = "7.0.0", optional = true }
+
+[tool.poetry.extras]
+banal = ["banal"]
+local_poetry_project = ["local-poetry-project"]
+incompatible = ["pendulum"]
+incompatible_python_version = ["waitress"]
+test_windows_deps = ["docker"]
+
+[tool.poetry.group.dev.dependencies]
+requests = "2.31.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
