@@ -22,8 +22,7 @@ def target_environment():
 
 def test_search_tree_for_lock_file(search_start_dir, search_end_dir):
     reader = PyLock(search_start_dir, search_end_dir)
-    assert set(reader.pylock_file_paths) == {search_start_dir / "pylock.toml",
-                                        search_start_dir / "pylock.test_project.toml"}
+    assert set(reader.pylock_file_paths) == {search_start_dir / "pylock.toml"}
 
 def test_parse_pylock_file(search_start_dir, search_end_dir):
     reader = PyLock(search_start_dir, search_end_dir)
@@ -37,7 +36,7 @@ def test_valid_pylock_file(search_start_dir, search_end_dir, target_environment)
 
     # validate that lock file is valid for current Python env
     reader.validate_pylock_toml()
-    assert reader.pylock_toml_is_validate == True
+    assert reader.pylock_toml_is_validated == True
 
 def test_valid_packages_pylock_file(search_start_dir, search_end_dir, target_environment):
 

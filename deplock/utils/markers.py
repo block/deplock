@@ -46,6 +46,38 @@ def validate_python_version(specifier: str, current_version: str | PythonVersion
     markers = []
     for part in parts:
         current_part = part.strip()
+        # Handle wildcard version (*)
+        if current_part == '*':
+            # * means any version is acceptable
+            markers.append(True)
+            continue
+
+        # Handle caret (^) version specifier
+        if current_part.startswith("^"):
+            # ^3.10 means >= 3.10.0, < 4.0.0
+            version_str = current_part[1:].strip()
+            version = _py_version_converter(py_version=version_str)
+
+            # Create >= marker
+            if version.micro == "*" or version.micro is None:
+                gte_marker = f"python_version >= '{version.major_minor_only_spec()}'"
+            else:
+                gte_marker = f"python_full_version >= '{version}'"
+
+            # Create < marker for next major version
+            lt_marker = f"python_version < '{version.major + 1}'"
+
+            # Evaluate both markers
+            if version.micro == "*" or version.micro is None:
+                current_version_eval_dict = dict(python_version=current_py_version.major_minor_only_spec())
+            else:
+                current_version_eval_dict = dict(python_full_version=current_py_version_str)
+
+            markers.append(Marker(gte_marker).evaluate(environment=current_version_eval_dict))
+            markers.append(Marker(lt_marker).evaluate(environment=current_version_eval_dict))
+            continue
+
+        # Handle standard operators
         for op in valid_ops:
             if current_part.startswith(op):
                 version = _py_version_converter(py_version=current_part[len(op):].strip())

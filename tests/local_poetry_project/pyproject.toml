@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "local-poetry-project"
+version = "0.1.0"
+description = "Used only as testing local dependencies"
+authors = ["Tyler Zupan <tzupan@squareup.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,3 +1,4 @@
+from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
 
@@ -24,3 +25,14 @@ class PythonRequirement:
 
     def __str__(self):
         return f"{self.name}=={self.version}"
+
+
+@dataclass(frozen=True)
+class LocalPythonRequirement(PythonRequirement):
+    """
+    Represents a Python requirement that references
+    a distribution that needs to be built from a
+    local directory.
+    """
+
+    directory: Path

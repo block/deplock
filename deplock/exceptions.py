@@ -29,5 +29,12 @@ class MissingLockMetadataError(DepLockReaderError):
 class NoUVLockFileFoundError(DepLockReaderError):
     """Raised when no UV lock file can be found in the directory tree."""
     
-class NoPoetryLockFileFoundError(DepLockReaderError):
+class MissingPoetryLockFileError(DepLockReaderError):
     """Raised when no Poetry lock file can be found in the directory tree."""
+
+class StalePoetryLockFileError(DepLockReaderError):
+    """Raised when the pyproject.toml has been modified more recently
+     than the Poetry lock file."""
+
+class PoetryPyprojectMissingPythonSpecError(DepLockReaderError):
+    """Raised when a poetry pyproject.toml is missing a Python specification."""

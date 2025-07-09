@@ -1,10 +1,10 @@
 import pytest
 from pathlib import Path
 
-from deplock.parser.poetry import PoetryLock
+from deplock.parser.poetry_class import PoetryLock
 from deplock.types.environment import PythonVersion
 from deplock.utils.prebuilt_envs import python_env_one
-from deplock.exceptions import NoPoetryLockFileFoundError
+from deplock.exceptions import MissingPoetryLockFileError
 
 
 @pytest.fixture
@@ -25,7 +25,7 @@ def test_find_poetry_lock_file(poetry_lock_dir):
 
 
 def test_find_nonexistent_poetry_lock_file(poetry_lock_dir):
-    with pytest.raises(NoPoetryLockFileFoundError):
+    with pytest.raises(MissingPoetryLockFileError):
         PoetryLock(base_path=poetry_lock_dir,
                 poetry_lock_filename="nonexistent.lock")
 
@@ -38,7 +38,7 @@ def test_poetry_parser(poetry_lock_dir, target_environment):
     assert poetry_lock.poetry_lock_is_validated == True
     
     valid_packages = poetry_lock.get_valid_packages_from_lock()
-    package_names = [i.name for i in valid_packages]
+    package_names = [i for i in valid_packages]
     assert len(package_names) == len(set(package_names)), "Package names should be unique"
     assert len(package_names) > 0, "Should have found packages in the poetry.lock file"
 
