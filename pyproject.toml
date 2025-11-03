@@ -1,11 +1,15 @@
 [project]
 name = "deplock"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 readme = "README.md"
 authors = [{ name = "Tyler Zupan", email = "tzupan@squareup.com" },
            { name = "Josh Hamet", email = "jhamet@squareup.com" },
 ]
+
+[project.urls]
+repository = "https://github.com/block/deplock"
+
 requires-python = ">=3.10"
 dependencies = [
     "poetry>=2.1.3",
