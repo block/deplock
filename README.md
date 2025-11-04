@@ -40,7 +40,7 @@ config.validate_pylock_toml()
 config.get_valid_packages_from_lock()
 ```
 
-Simply change the configuration class if to parse `uv.lock` files!
+Simply change the configuration class to parse `uv.lock` files!
 ```python
 from deplock.parser.uv import UVLock
 from deplock.types.environment import PythonVersion
@@ -70,19 +70,19 @@ environment.  The PEP confirms this, stating "_Tools MUST NOT use this informati
 doing installation; it is purely informational for auditing purposes._"
 
 More Open Source and usage information can be found here:
-* [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
+* [CODE_OF_CONDUCT.md](https://github.com/block/.github/blob/main/CODE_OF_CONDUCT.md)
 * [GOVERNANCE.md](./GOVERNANCE.md)
 * [LICENSE](./LICENSE)
 
 ## Project Resources
 
-| Resource                                   | Description                                                                    |
-| ------------------------------------------ | ------------------------------------------------------------------------------ |
-| [CODEOWNERS](./CODEOWNERS)                 | Outlines the project lead(s)                                                   |
-| [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Expected behavior for project contributors, promoting a welcoming environment |
-| [CONTRIBUTING.md](./CONTRIBUTING.md)       | Developer guide to build, test, run, access CI, chat, discuss, file issues     |
-| [GOVERNANCE.md](./GOVERNANCE.md)           | Project governance                                                             |
-| [LICENSE](./LICENSE)                       | Apache License, Version 2.0                                                    |
+| Resource                                                                              | Description                                                                   |
+|---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| [CODEOWNERS](./CODEOWNERS)                                                            | Outlines the project lead(s)                                                  |
+| [CODE_OF_CONDUCT.md](https://github.com/block/.github/blob/main/CODE_OF_CONDUCT.md)   | Expected behavior for project contributors, promoting a welcoming environment |
+| [CONTRIBUTING.md](https://github.com/block/.github/blob/main/CONTRIBUTING.md)         | Developer guide to build, test, run, access CI, chat, discuss, file issues    |
+| [GOVERNANCE.md](./GOVERNANCE.md)                                                      | Project governance                                                            |
+| [LICENSE](./LICENSE)                                                                  | Apache License, Version 2.0                                                   |
 
 Authors:
 * Tyler Zupan
